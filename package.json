@@ -1,7 +1,7 @@
 {
 	"name": "poxtxml-import",
 	"version": "0.1.0",
-	"description": "Postxml plugin enables import html file.",
+	"description": "Postxml plugin enables import files.",
 	"main": "index.js",
 	"dependencies": {
 		"postxml": "^0.0.5"
