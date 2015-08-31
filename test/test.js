@@ -14,7 +14,7 @@ var test = function (input, output, opts) {
     expect(proccessed).to.eql(output);
 };
 
-describe('poxtxml-import', function () {
+describe('postxml-import', function () {
     it('import file', function () {
         test(
             '<import src="test/block.htm"></import>',

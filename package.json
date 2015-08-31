@@ -1,5 +1,5 @@
 {
-	"name": "poxtxml-import",
+	"name": "postxml-import",
 	"version": "0.1.0",
 	"description": "Postxml plugin enables import files.",
 	"main": "index.js",
@@ -18,7 +18,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/postxml/poxtxml-import.git"
+		"url": "git+https://github.com/postxml/postxml-import.git"
 	},
 	"keywords": [
 		"html",
@@ -32,7 +32,7 @@
 	},
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/postxml/poxtxml-import/issues"
+		"url": "https://github.com/postxml/postxml-import/issues"
 	},
-	"homepage": "https://github.com/postxml/poxtxml-import#readme"
+	"homepage": "https://github.com/postxml/postxml-import#readme"
 }
