@@ -50,4 +50,12 @@ describe('postxml-import', function () {
             {}
         );
     });
+    it('import link', function () {
+        test(
+            '<link rel="import" href="test/block.htm"></link>',
+            'test/block.htm',
+            '',
+            {}
+        );
+    });
 });

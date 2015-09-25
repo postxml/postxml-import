@@ -3,7 +3,11 @@ var fs = require('fs'),
 
 module.exports = function (opts) {
     
-    var options = opts || {}; 
+    var options = options || {};
+    options.selectors = options.selectors || {};
+    options.selectors.base = options.selectors.base || 'import[src]';
+    options.selectors.block = options.selectors.block || 'import[block]';
+    options.selectors.component = options.selectors.component || 'link[rel=import][href]'
     
     return function ($) {
         var importFile = function (element, path) {
@@ -35,17 +39,30 @@ module.exports = function (opts) {
         
             $(element).replaceWith(file);
         }
-
-        $('import[src]').each(function () {
-            var path = process.cwd() + '/' + $(this).attr('src');
-            
-            importFile($(this), path);
-        });
-        $('import[block]').each(function () {
-            var block = $(this).attr('block'),
-                path = process.cwd() + '/blocks/' + block + '/' + block + '.htm';
-            
-            importFile(this, path);
-        });
+        
+        while ($(options.selectors.base).length > 0) {
+            $(options.selectors.base).each(function () {
+                var path = process.cwd() + '/' + $(this).attr('src');
+                
+                importFile($(this), path);
+            });
+        }
+        
+        while ($(options.selectors.block).length > 0) {
+            $(options.selectors.block).each(function () {
+                var block = $(this).attr('block'),
+                    path = process.cwd() + '/blocks/' + block + '/' + block + '.htm';
+                
+                importFile(this, path);
+            });
+        }
+        
+        while ($(options.selectors.component).length > 0) {
+            $(options.selectors.component).each(function () {
+                var path = process.cwd() + '/' + $(this).attr('href');
+                
+                importFile($(this), path);
+            });
+        }
     };
 };

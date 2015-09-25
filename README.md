@@ -8,14 +8,14 @@
 
 ## [Usage]
 
-## Example 1
+## Example 1 (Base syntas)
 
 ### Input
 ```html
 <import src="block.htm"></import>
 ```
 
-### block.htm
+### block.htm `(process.cwd() + block.htm)`
 ```html
 <div class="b-block">
     <div class="b-block__element"></div>
@@ -29,7 +29,28 @@
 </div>
 ```
 
-## Example 2
+## Example 2 (Web components syntax)
+
+### Input
+```html
+<link rel="import" src="block.htm"></link>
+```
+
+### block.htm `(process.cwd() + block.htm)`
+```html
+<div class="b-block">
+    <div class="b-block__element"></div>
+</div>
+```
+
+### Output
+```html
+<div class="b-block">
+    <div class="b-block__element"></div>
+</div>
+```
+
+## Example 3 (Import block)
 ```html
 <import block="b-block" mod="color:red"></import>
 ```
