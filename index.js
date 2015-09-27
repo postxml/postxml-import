@@ -25,8 +25,11 @@ module.exports = function (opts) {
                         
                         var el = $.load(file);
                         
+                        // add attributes to the root elements
                         el.root().children().each(function () {
                             this.attribs = _.merge(this.attribs, attrs, function (a, b) {
+                                
+                                // merge same attributes
                                 if (a) {
                                     return a.concat(b);
                                 }
@@ -44,6 +47,7 @@ module.exports = function (opts) {
             $(element).replaceWith(file);
         }
         
+        // base syntax (<import src="">)
         while ($(options.selectors.base).length > 0) {
             $(options.selectors.base).each(function () {
                 var path = process.cwd() + '/' + $(this).attr('src');
@@ -52,6 +56,7 @@ module.exports = function (opts) {
             });
         }
         
+        // block syntax (<import block="">)
         while ($(options.selectors.block).length > 0) {
             $(options.selectors.block).each(function () {
                 var block = $(this).attr('block'),
@@ -61,6 +66,7 @@ module.exports = function (opts) {
             });
         }
         
+        // web components syntax (<link rel="import" href="">)
         while ($(options.selectors.component).length > 0) {
             $(options.selectors.component).each(function () {
                 var path = process.cwd() + '/' + $(this).attr('href');
