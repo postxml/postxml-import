@@ -26,7 +26,11 @@ module.exports = function (opts) {
                         var el = $.load(file);
                         
                         el.root().children().each(function () {
-                            this.attribs = _.merge(this.attribs, attrs);
+                            this.attribs = _.merge(this.attribs, attrs, function (a, b) {
+                                if (a) {
+                                    return a.concat(b);
+                                }
+                            });
                         });
                         
                         file = el.html();

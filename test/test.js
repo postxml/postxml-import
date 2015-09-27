@@ -50,6 +50,14 @@ describe('postxml-import', function () {
             {}
         );
     });
+    it('import block with additional attributes', function () {
+        test(
+            '<import block="block" class=" bg"></import>',
+            '',
+            '<div class="block bg"><a href="#">Link</a></div>',
+            {}
+        );
+    });
     it('import link', function () {
         test(
             '<link rel="import" href="test/block.htm"></link>',
