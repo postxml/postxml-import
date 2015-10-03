@@ -1,13 +1,15 @@
 var fs = require('fs'),
     _ = require('lodash');
 
-module.exports = function (opts) {
+module.exports = function (options) {
     
+    var path = function (attr) {
+        return process.cwd() + '/' + attr;
+    }
     var options = options || {};
-    options.selectors = options.selectors || {};
-    options.selectors.base = options.selectors.base || 'import[src]';
-    options.selectors.block = options.selectors.block || 'import[block]';
-    options.selectors.component = options.selectors.component || 'link[rel=import][href]'
+    options.selector = options.selector || 'import[src]';
+    options.attr = options.attr || 'src';
+    options.path = options.path || path;
     
     return function ($) {
         var importFile = function (element, path) {
@@ -19,7 +21,7 @@ module.exports = function (opts) {
                 // merge attributes
                 var attrs = element.attribs;
                 if (attrs) {
-                    attrs = _.omit(attrs, 'block');
+                    attrs = _.omit(attrs, options.attr);
                     
                     if (!_.isEmpty(attrs)) {
                         
@@ -47,31 +49,12 @@ module.exports = function (opts) {
             $(element).replaceWith(file);
         }
         
-        // base syntax (<import src="">)
-        while ($(options.selectors.base).length > 0) {
-            $(options.selectors.base).each(function () {
-                var path = process.cwd() + '/' + $(this).attr('src');
-                
-                importFile($(this), path);
-            });
-        }
-        
-        // block syntax (<import block="">)
-        while ($(options.selectors.block).length > 0) {
-            $(options.selectors.block).each(function () {
-                var block = $(this).attr('block'),
-                    path = process.cwd() + '/blocks/' + block + '/' + block + '.htm';
-                
-                importFile(this, path);
-            });
-        }
-        
-        // web components syntax (<link rel="import" href="">)
-        while ($(options.selectors.component).length > 0) {
-            $(options.selectors.component).each(function () {
-                var path = process.cwd() + '/' + $(this).attr('href');
-                
-                importFile($(this), path);
+        while ($(options.selector).length > 0) {
+            $(options.selector).each(function () {
+                importFile(
+                    this,
+                    options.path($(this).attr(options.attr))
+                );
             });
         }
     };

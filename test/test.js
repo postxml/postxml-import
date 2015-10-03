@@ -23,7 +23,10 @@ describe('postxml-import', function () {
             '<import src="test/block.htm"></import>',
             'test/block.htm',
             '',
-            {}
+            {
+                selector: 'import[src]',
+                attr: 'src'
+            }
         );
     });
     it('file does not exist', function () {
@@ -31,7 +34,10 @@ describe('postxml-import', function () {
             '<import src="error.htm"></import>',
             '',
             '',
-            {}
+            {
+                selector: 'import[src]',
+                attr: 'src'
+            }
         );
     });
     it('import block', function () {
@@ -39,7 +45,13 @@ describe('postxml-import', function () {
             '<import block="block"></import>',
             'blocks/block/block.htm',
             '',
-            {}
+            {
+                selector: 'import[block]',
+                attr: 'block',
+                path: function (block) {
+                    return process.cwd() + '/blocks/' + block + '/' + block + '.htm'
+                }
+            }
         );
     });
     it('import block with additional attributes', function () {
@@ -47,23 +59,38 @@ describe('postxml-import', function () {
             '<import block="block" mod="color:red" wrap=".g-section.g-section__content"></import>',
             '',
             '<div class="block" mod="color:red" wrap=".g-section.g-section__content"><a href="#">Link</a></div>',
-            {}
+            {
+                selector: 'import[block]',
+                attr: 'block',
+                path: function (block) {
+                    return process.cwd() + '/blocks/' + block + '/' + block + '.htm'
+                }
+            }
         );
     });
-    it('import block with additional attributes', function () {
+    it('import block with additional classes', function () {
         test(
             '<import block="block" class=" bg"></import>',
             '',
             '<div class="block bg"><a href="#">Link</a></div>',
-            {}
+            {
+                selector: 'import[block]',
+                attr: 'block',
+                path: function (block) {
+                    return process.cwd() + '/blocks/' + block + '/' + block + '.htm'
+                }
+            }
         );
     });
     it('import link', function () {
         test(
             '<link rel="import" href="test/block.htm"></link>',
-            'test/block.htm',
             '',
-            {}
+            '<div class="b-block" rel="import"><div class="b-block__element"></div></div>',
+            {
+                selector: 'link[rel=import][href]',
+                attr: 'href'
+            }
         );
     });
 });
