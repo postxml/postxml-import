@@ -1,6 +1,6 @@
 {
   "name": "postxml-import",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Postxml plugin enables import files.",
   "main": "index.js",
   "dependencies": {
