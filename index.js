@@ -12,7 +12,7 @@ module.exports = function (options) {
     options.path = options.path || path;
     
     return function ($) {
-        $.prototype.import = function (element) {
+        $.prototype.import = function () {
             var file = '',
                 path = options.path(this.attr(options.attr));
         

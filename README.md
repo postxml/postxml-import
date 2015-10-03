@@ -1,12 +1,34 @@
 # postxml-import
 [![npm version][npm-image]][npm-url]
 
-> [PostXML] plugin enabling configuration maps.
+> [PostXML] to import html files.
 
 ## Installation
 `npm i postxml-import --save-dev`
 
 ## [Usage]
+
+## Options
+
+### selector
+*Query selector.*<br>
+Type: `String`<br>
+Default: `import[src]`
+
+### attr
+*Attribute that contains path.*<br>
+Type: `String`<br>
+Default: `src`
+
+### path
+*Function that get value of attr and returns absolute path to file.*<br>
+Type: `Function`<br>
+Default:
+```js
+function (attr) {
+    return process.cwd() + '/' + attr;
+}
+```
 
 ## Example 1 (Base syntas)
 
@@ -36,37 +58,28 @@
 <link rel="import" src="block.htm"></link>
 ```
 
-### block.htm `(process.cwd() + block.htm)`
-```html
-<div class="b-block">
-    <div class="b-block__element"></div>
-</div>
-```
-
-### Output
-```html
-<div class="b-block">
-    <div class="b-block__element"></div>
-</div>
+### Options
+```js
+{
+    selector: 'link[rel=import][href]',
+    attr: 'href'
+}
 ```
 
 ## Example 3 (Import block)
 ```html
-<import block="b-block" mod="color:red"></import>
+<import block="b-block"></import>
 ```
 
 ### blocks/b-block/b-block.htm
-```html
-<div class="b-block" mod="color:red">
-    <div class="b-block__element"></div>
-</div>
-```
-
-### Output
-```html
-<div class="b-block" mod="color:red">
-    <div class="b-block__element"></div>
-</div>
+```js
+{
+    selector: 'import[block]',
+    attr: 'block',
+    path: function (block) {
+        return process.cwd() + '/blocks/' + block + '/' + block + '.htm'
+    }
+}
 ```
 
 ## Licence
