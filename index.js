@@ -12,14 +12,15 @@ module.exports = function (options) {
     options.path = options.path || path;
     
     return function ($) {
-        var importFile = function (element, path) {
-            var file = '';
+        $.prototype.import = function (element) {
+            var file = '',
+                path = options.path(this.attr(options.attr));
         
             if ( fs.existsSync(path) ) {
                 file = String( fs.readFileSync(path) );
                 
                 // merge attributes
-                var attrs = element.attribs;
+                var attrs = this[0].attribs;
                 if (attrs) {
                     attrs = _.omit(attrs, options.attr);
                     
@@ -46,16 +47,11 @@ module.exports = function (options) {
                 file = '';
             }
         
-            $(element).replaceWith(file);
+            this.replaceWith(file);
         }
         
         while ($(options.selector).length > 0) {
-            $(options.selector).each(function () {
-                importFile(
-                    this,
-                    options.path($(this).attr(options.attr))
-                );
-            });
+            $(options.selector).import();
         }
     };
 };
