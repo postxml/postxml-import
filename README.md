@@ -6,7 +6,8 @@
 ## Installation
 `npm i postxml-import --save-dev`
 
-## [Usage]
+## Usage
+[Usage]
 
 ## Options
 
@@ -71,7 +72,7 @@ function (attr) {
 <import block="b-block"></import>
 ```
 
-### blocks/b-block/b-block.htm
+### Options
 ```js
 {
     selector: 'import[block]',

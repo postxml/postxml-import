@@ -22,22 +22,21 @@ describe('postxml-import', function () {
         test(
             '<import src="test/block.htm"></import>',
             'test/block.htm',
-            '',
-            {
-                selector: 'import[src]',
-                attr: 'src'
-            }
+            ''
         );
     });
     it('file does not exist', function () {
         test(
             '<import src="error.htm"></import>',
             '',
+            ''
+        );
+    });
+    it('import several files', function () {
+        test(
+            '<import src="test/block.htm"></import><import src="test/header.htm"></import>',
             '',
-            {
-                selector: 'import[src]',
-                attr: 'src'
-            }
+            '<div class="b-block"><div class="b-block__element"></div></div><header></header>'
         );
     });
     it('import block', function () {
