@@ -27,7 +27,7 @@ Type: `Function`<br>
 Default:
 ```js
 function (attr) {
-    return process.cwd() + '/' + attr;
+    return attr;
 }
 ```
 

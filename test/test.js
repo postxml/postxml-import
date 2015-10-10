@@ -8,7 +8,7 @@ var test = function (input, file, output, opts) {
     var proccessed = postxml([plugin(opts)]).process(input);
 
     if ( file != '' && ( file.indexOf('.htm') >= 0 || file.indexOf('.html') >= 0 ) ) {
-        file = String( fs.readFileSync(process.cwd() + '/' + file) );
+        file = String( fs.readFileSync(file) );
     }
     if (output != '') {
         file = output;
@@ -48,7 +48,7 @@ describe('postxml-import', function () {
                 selector: 'import[block]',
                 attr: 'block',
                 path: function (block) {
-                    return process.cwd() + '/blocks/' + block + '/' + block + '.htm'
+                    return 'blocks/' + block + '/' + block + '.htm'
                 }
             }
         );
@@ -62,7 +62,7 @@ describe('postxml-import', function () {
                 selector: 'import[block]',
                 attr: 'block',
                 path: function (block) {
-                    return process.cwd() + '/blocks/' + block + '/' + block + '.htm'
+                    return 'blocks/' + block + '/' + block + '.htm'
                 }
             }
         );
@@ -76,7 +76,7 @@ describe('postxml-import', function () {
                 selector: 'import[block]',
                 attr: 'block',
                 path: function (block) {
-                    return process.cwd() + '/blocks/' + block + '/' + block + '.htm'
+                    return 'blocks/' + block + '/' + block + '.htm'
                 }
             }
         );

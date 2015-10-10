@@ -4,7 +4,7 @@ var fs = require('fs'),
 module.exports = function (options) {
     
     var path = function (attr) {
-        return process.cwd() + '/' + attr;
+        return attr;
     }
     options = options || {};
     options.selector = options.selector || 'import[src]';
