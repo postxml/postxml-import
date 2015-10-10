@@ -78,7 +78,7 @@ function (attr) {
     selector: 'import[block]',
     attr: 'block',
     path: function (block) {
-        return process.cwd() + '/blocks/' + block + '/' + block + '.htm'
+        return 'blocks/' + block + '/' + block + '.htm'
     }
 }
 ```
