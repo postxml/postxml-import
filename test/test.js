@@ -81,14 +81,16 @@ describe('postxml-import', function () {
             }
         );
     });
-    it('import link', function () {
+    it('import svg', function () {
         test(
-            '<link rel="import" href="test/block.htm"></link>',
+            '<img src="image.svg">',
             '',
-            '<div class="b-block" rel="import"><div class="b-block__element"></div></div>',
+            '<svg width="400" height="100"><rect width="400" height="100" style="fill:rgb(0,0,255);stroke-width:10;stroke:rgb(0,0,0)"/></svg>',
             {
-                selector: 'link[rel=import][href]',
-                attr: 'href'
+                selector: 'img[src$=".svg"]',
+                path: function (attr) {
+                    return 'test/' + attr;
+                }
             }
         );
     });

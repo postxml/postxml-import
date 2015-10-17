@@ -31,56 +31,67 @@ function (attr) {
 }
 ```
 
-## Example 1 (Base syntas)
+## Examples
 
-### Input
+### Example 1 (Base syntas)
+
+#### Input
 ```html
 <import src="block.htm"></import>
 ```
 
-### block.htm `(process.cwd() + block.htm)`
+#### block.htm `(block.htm)`
 ```html
 <div class="b-block">
     <div class="b-block__element"></div>
 </div>
 ```
 
-### Output
+#### Output
 ```html
 <div class="b-block">
     <div class="b-block__element"></div>
 </div>
 ```
 
-## Example 2 (Web components syntax)
-
-### Input
+### Example 2 (Import component)
 ```html
-<link rel="import" src="block.htm"></link>
+<import component="componentName"></import>
 ```
 
-### Options
+#### Options
 ```js
 {
-    selector: 'link[rel=import][href]',
-    attr: 'href'
-}
-```
-
-## Example 3 (Import block)
-```html
-<import block="b-block"></import>
-```
-
-### Options
-```js
-{
-    selector: 'import[block]',
-    attr: 'block',
-    path: function (block) {
-        return 'blocks/' + block + '/' + block + '.htm'
+    selector: 'import[component]',
+    attr: 'component',
+    path: function (componentName) {
+        return 'blocks/' + componentName + '/' + componentName + '.htm'
     }
 }
+```
+
+### Example 3 (Inline svg)
+
+#### Input
+```html
+<img src="image.svg">
+```
+
+#### Options
+```js
+{
+    selector: 'img[src$=".svg"]',
+    path: function (src) {
+        return 'cwd/' + src
+    }
+}
+```
+
+#### Output
+```html
+<svg width="100" height="100">
+    <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
+</svg>
 ```
 
 ## Licence
