@@ -101,4 +101,11 @@ describe('postxml-import', function () {
             '<div class="b-block"><div class="b-block__element"></div><p>Content</p></div>'
         );
     });
+    it('import file with content recursively', function () {
+        test(
+            '<import src="test/block2.htm"><import src="test/block.htm"></import></import>',
+            '',
+            '<div class="b-block"><div class="b-block__element"></div><div class="b-block"><div class="b-block__element"></div></div></div>'
+        );
+    });
 });
