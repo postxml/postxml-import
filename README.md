@@ -54,7 +54,32 @@ function (attr) {
 </div>
 ```
 
-### Example 2 (Import component)
+### Example 2 (import width content)
+
+#### Input
+```html
+<import src="block.htm">
+	<p>Content</p>
+</import>
+```
+
+#### block.htm `(block.htm)`
+```html
+<div class="b-block">
+    <div class="b-block__element"></div>
+	<content></content>
+</div>
+```
+
+#### Output
+```html
+<div class="b-block">
+    <div class="b-block__element"></div>
+	<p>Content</p>
+</div>
+```
+
+### Example 3 (Import component)
 ```html
 <import component="componentName"></import>
 ```
@@ -70,7 +95,7 @@ function (attr) {
 }
 ```
 
-### Example 3 (Inline svg)
+### Example 4 (Inline svg)
 
 #### Input
 ```html

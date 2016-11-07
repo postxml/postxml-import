@@ -1,6 +1,6 @@
 {
   "name": "postxml-import",
-  "version": "0.3.5",
+  "version": "0.4.0",
   "description": "Postxml plugin enables import files.",
   "main": "index.js",
   "dependencies": {
@@ -11,6 +11,8 @@
     "gulp": "^3.9.0",
     "gulp-eslint": "^1.0.0",
     "gulp-mocha": "^2.1.3",
+    "jscs": "^3.0.7",
+    "jshint": "^2.9.4",
     "postxml": "^0.2.3"
   },
   "scripts": {

@@ -4,13 +4,13 @@ var expect = require('chai').expect;
 var fs = require('fs');
 
 var test = function (input, file, output, opts) {
-    
+
     var proccessed = postxml([plugin(opts)]).process(input);
 
-    if ( file != '' && ( file.indexOf('.htm') >= 0 || file.indexOf('.html') >= 0 ) ) {
+    if ( file !== '' && ( file.indexOf('.htm') >= 0 || file.indexOf('.html') >= 0 ) ) {
         file = String( fs.readFileSync(file) );
     }
-    if (output != '') {
+    if (output !== '') {
         file = output;
     }
 
@@ -48,7 +48,7 @@ describe('postxml-import', function () {
                 selector: 'import[block]',
                 attr: 'block',
                 path: function (block) {
-                    return 'blocks/' + block + '/' + block + '.htm'
+                    return 'blocks/' + block + '/' + block + '.htm';
                 }
             }
         );
@@ -62,7 +62,7 @@ describe('postxml-import', function () {
                 selector: 'import[block]',
                 attr: 'block',
                 path: function (block) {
-                    return 'blocks/' + block + '/' + block + '.htm'
+                    return 'blocks/' + block + '/' + block + '.htm';
                 }
             }
         );
@@ -76,7 +76,7 @@ describe('postxml-import', function () {
                 selector: 'import[block]',
                 attr: 'block',
                 path: function (block) {
-                    return 'blocks/' + block + '/' + block + '.htm'
+                    return 'blocks/' + block + '/' + block + '.htm';
                 }
             }
         );
@@ -92,6 +92,13 @@ describe('postxml-import', function () {
                     return 'test/' + attr;
                 }
             }
+        );
+    });
+    it('import file with content', function () {
+        test(
+            '<import src="test/block2.htm"><p>Content</p></import>',
+            '',
+            '<div class="b-block"><div class="b-block__element"></div><p>Content</p></div>'
         );
     });
 });
